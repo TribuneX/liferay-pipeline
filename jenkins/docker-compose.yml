@@ -6,7 +6,8 @@ services:
     ports: 
       - "8080:8080"
       - "50000:50000"
-    volumes: 
+    volumes:
+      - ./settings.xml:/usr/share/java/maven-3/conf/settings.xml 
       - ../container_storage/jenkins_home:/var/jenkins_home
   nexus:
     container_name: nexus
