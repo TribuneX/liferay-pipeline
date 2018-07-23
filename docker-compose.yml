@@ -1,0 +1,28 @@
+version: '3'
+services:
+  jenkins:
+    container_name: jenkins
+    image: tribunex/jenkins-maven:latest
+    ports: 
+      - "80:8080"
+      - "50000:50000"
+    volumes:
+      - ./jenkins/settings.xml:/usr/share/java/maven-3/conf/settings.xml 
+      - ./container_storage/jenkins_home:/var/jenkins_home
+      - ./container_storage/liferay_home:/var/liferay
+    environment:
+      - NEXUS_HOSTNAME=nexus
+  nexus:
+    container_name: nexus
+    image: sonatype/nexus3
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./container_storage/nexus_home:/nexus-data
+  liferay:
+    container_name: liferay
+    image: liferay/liferay-portal:7.1.0-ga1-1.1
+    ports: 
+      - "8080:8080"
+    volumes:
+      - ./container_storage/liferay_home:/opt/liferay/deploy
