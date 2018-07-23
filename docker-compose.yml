@@ -12,6 +12,7 @@ services:
       - ./container_storage/liferay_home:/var/liferay
     environment:
       - NEXUS_HOSTNAME=nexus
+      - LIFERAY_HOME=/var/liferay
   nexus:
     container_name: nexus
     image: sonatype/nexus3
