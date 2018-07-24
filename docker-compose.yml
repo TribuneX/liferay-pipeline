@@ -11,7 +11,7 @@ services:
       - ${CONTAINER_STORAGE}/jenkins_home:/var/jenkins_home
       - ${CONTAINER_STORAGE}/${LIFERAY_STORAGE}:${LIFERAY_HOME}
     environment:
-      - NEXUS_HOSTNAME=${NEXUS_HOSTNAME}
+      - NEXUS_HOSTNAME=${NEXUS_HOST}
       - LIFERAY_HOME=${LIFERAY_HOME}
   nexus:
     container_name: nexus
