@@ -8,22 +8,22 @@ services:
       - "50000:50000"
     volumes:
       - ./jenkins/settings.xml:/usr/share/java/maven-3/conf/settings.xml 
-      - ./container_storage/jenkins_home:/var/jenkins_home
-      - ./container_storage/liferay_home:/var/liferay
+      - ${CONTAINER_STORAGE}/jenkins_home:/var/jenkins_home
+      - ${CONTAINER_STORAGE}/${LIFERAY_STORAGE}:${LIFERAY_HOME}
     environment:
-      - NEXUS_HOSTNAME=nexus
-      - LIFERAY_HOME=/var/liferay
+      - NEXUS_HOSTNAME=${NEXUS_HOSTNAME}
+      - LIFERAY_HOME=${LIFERAY_HOME}
   nexus:
     container_name: nexus
     image: sonatype/nexus3
     ports:
       - "8081:8081"
     volumes:
-      - ./container_storage/nexus_home:/nexus-data
+      - ${CONTAINER_STORAGE}/nexus_home:/nexus-data
   liferay:
     container_name: liferay
     image: liferay/liferay-portal:7.1.0-ga1-1.1
     ports: 
       - "8080:8080"
     volumes:
-      - ./container_storage/liferay_home:/opt/liferay/deploy
+      - ${CONTAINER_STORAGE}/${LIFERAY_STORAGE}:/opt/liferay/deploy
